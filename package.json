@@ -1,7 +1,7 @@
 {
   "name": "gulp-ejs",
-  "version": "0.0.3",
-  "description": "A plugin for Gulp",
+  "version": "0.1.0",
+  "description": "A plugin for Gulp that parses ejs template files",
   "keywords": [
     "gulpplugin",
     "gulp",
@@ -29,9 +29,7 @@
   },
   "devDependencies": {
     "mocha": "~1.14.0",
-    "should": "~2.1.0",
-    "gulp-util": "~2.2.0",
-    "ejs": "~0.8.5"
+    "should": "~2.1.0"
   },
   "engines": {
     "node": ">=0.8.0",
