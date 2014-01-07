@@ -1,0 +1,43 @@
+{
+  "name": "gulp-ejs",
+  "version": "0.0.0",
+  "description": "A plugin for Gulp",
+  "keywords": [
+    "gulpplugin",
+    "gulp",
+    "ejs"
+  ],
+  "homepage": "https://github.com/rogeriopvl/gulp-ejs",
+  "bugs": "https://github.com/rogeriopvl/gulp-ejs/issues",
+  "author": {
+    "name": "Rogério Vicente",
+    "email": "",
+    "url": "https://github.com/rogeriopvl"
+  },
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rogeriopvl/gulp-ejs.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "event-stream": "*"
+  },
+  "devDependencies": {
+    "mocha": "~1.14.0",
+    "should": "~2.1.0",
+    "gulp-util": "~2.2.0",
+    "ejs": "~0.8.5"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.2.10"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
