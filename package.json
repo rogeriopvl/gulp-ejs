@@ -1,6 +1,6 @@
 {
   "name": "gulp-ejs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A plugin for Gulp",
   "keywords": [
     "gulpplugin",
@@ -23,7 +23,8 @@
     "test": "mocha"
   },
   "dependencies": {
-    "event-stream": "*"
+    "event-stream": "*",
+    "gulp-util": "~2.2.6"
   },
   "devDependencies": {
     "mocha": "~1.14.0",
