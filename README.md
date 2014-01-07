@@ -32,6 +32,8 @@ Default: `{}`
 
 A hash object where each key corresponds to a variable in your template. Also you can set ejs options in this hash.
 
+For more info on `ejs` options, check the [project's documentation](https://github.com/visionmedia/ejs).
+
 
 ## License
 
