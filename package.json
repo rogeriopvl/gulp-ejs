@@ -37,7 +37,8 @@
   },
   "licenses": [
     {
-      "type": "MIT"
+      "type": "MIT",
+      "url": "https://github.com/rogeriopvl/gulp-ejs/blob/master/LICENSE"
     }
   ]
 }
