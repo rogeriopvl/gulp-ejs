@@ -24,7 +24,7 @@ gulp.src("./templates/*.ejs")
 
 ## API
 
-### ejs(options)
+### ejs(options, settings)
 
 #### options
 Type: `hash`
@@ -33,6 +33,18 @@ Default: `{}`
 A hash object where each key corresponds to a variable in your template. Also you can set ejs options in this hash.
 
 For more info on `ejs` options, check the [project's documentation](https://github.com/visionmedia/ejs).
+
+#### settings
+Type: `hash`
+Default: `{ext: '.html'}`
+
+A hash object to configure the plugin.
+
+##### settings.ext
+Type: `String`
+Default: `.html`
+
+Defines the default file extension that will be appended to the filename.
 
 
 ## License
