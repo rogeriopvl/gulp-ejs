@@ -2,7 +2,8 @@
 'use strict';
 
 var fs = require('fs'),
-should = require('should');
+should = require('should'),
+path = require('path');
 require('mocha');
 
 var gutil = require('gulp-util'),
@@ -43,7 +44,9 @@ describe('gulp-ejs', function () {
         });
 
         stream.write(srcFile);
-        stream.end();
+        String(path.extname(srcFile.path)).should.equal('.html');
+
+      stream.end();
     });
 
     it('should throw error when syntax is incorrect', function (done) {
@@ -65,4 +68,35 @@ describe('gulp-ejs', function () {
         stream.write(srcFile);
         stream.end();
     });
+
+  it('should produce correct html output with a specific file extension', function (done) {
+
+    var srcFile = new gutil.File({
+      path: 'test/fixtures/ok.ejs',
+      cwd: 'test/',
+      base: 'test/fixtures',
+      contents: fs.readFileSync('test/fixtures/ok.ejs')
+    });
+
+    var stream = ejs({ title: 'gulp-ejs' }, {ext:'.txt'});
+
+    stream.on('error', function (err) {
+      should.exist(err);
+      done(err);
+    });
+
+    stream.on('data', function (newFile) {
+
+      should.exist(newFile);
+      should.exist(newFile.contents);
+
+      String(newFile.contents).should.equal(String(expectedFile.contents));
+      done();
+    });
+
+    stream.write(srcFile);
+    String(path.extname(srcFile.path)).should.equal('.txt');
+
+    stream.end();
+  });
 });
