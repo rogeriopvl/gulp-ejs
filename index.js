@@ -5,16 +5,16 @@ var gutil = require('gulp-util');
 var ejs = require('ejs');
 
 module.exports = function (options, settings) {
+    settings = settings || {};
+    settings.ext = settings.ext || '.html';
+
     return es.map(function (file, cb) {
         try {
-            settings = settings || {};
-            if(!settings.ext) settings.ext = '.html';
-
             file.contents = new Buffer(ejs.render(file.contents.toString(), options));
             file.path = gutil.replaceExtension(file.path, settings.ext);
-            cb(null, file);
         } catch (err) {
-            return cb(new Error('gulp-ejs: ' + err));
+            return cb(new gutil.PluginError('gulp-ejs', err));
         }
+        cb(null, file);
     });
 };
