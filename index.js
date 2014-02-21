@@ -9,6 +9,8 @@ module.exports = function (options, settings) {
     settings.ext = settings.ext || '.html';
 
     return es.map(function (file, cb) {
+        options.filename = file.path;
+
         try {
             file.contents = new Buffer(ejs.render(file.contents.toString(), options));
             file.path = gutil.replaceExtension(file.path, settings.ext);
