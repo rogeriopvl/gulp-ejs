@@ -21,6 +21,20 @@ gulp.src("./templates/*.ejs")
 	}))
 	.pipe(gulp.dest("./dist"));
 ```
+If you want to use `gulp-ejs` in a watch/livereload task, you may want to avoid gulp exiting on error when, for instance, a partial file is `ENOENT`.
+Here's an example on how to make it work:
+
+```javascript
+var ejs = require('gulp-ejs');
+var gutil = require('gulp-util');
+
+gulp.src('./templates/*.ejs')
+	.pipe(ejs({
+		msg: 'Hello Gulp!'
+	}).on('error', gutil.log))
+	.pipe(gulp.dest('./dist'));
+```
+This will make gulp log the error and continue normal execution.
 
 ## API
 
