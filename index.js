@@ -1,6 +1,6 @@
 'use strict';
 
-var es = require('event-stream');
+var through = require('through2');
 var gutil = require('gulp-util');
 var ejs = require('ejs');
 
@@ -9,14 +9,28 @@ module.exports = function (options, settings) {
     options = options || {};
     settings.ext = settings.ext || '.html';
 
-    return es.map(function (file, cb) {
+    return through.obj(function (file, enc, cb) {
+        if (file.isNull()) {
+            this.push(file);
+            return cb();
+        }
+
+        if (file.isStream()) {
+            this.emit(
+                'error',
+                new gutil.PluginError('gulp-ejs', 'Streaming not supported')
+            );
+        }
+
+        options.filename = options.filename || file.path;
         try {
-            options.filename = options.filename || file.path;
             file.contents = new Buffer(ejs.render(file.contents.toString(), options));
             file.path = gutil.replaceExtension(file.path, settings.ext);
         } catch (err) {
-            return cb(new gutil.PluginError('gulp-ejs', err));
+            this.emit('error', new gutil.PluginError('gulp-ejs', err.toString()));
         }
-        cb(null, file);
+
+        this.push(file);
+        cb();
     });
 };

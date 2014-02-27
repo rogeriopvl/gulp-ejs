@@ -23,13 +23,13 @@
     "test": "mocha"
   },
   "dependencies": {
-    "event-stream": "*",
-    "gulp-util": "~2.2.6",
-    "ejs": "~0.8.5"
+    "gulp-util": "^2.2.14",
+    "ejs": "^0.8.5",
+    "through2": "^0.4.1"
   },
   "devDependencies": {
-    "mocha": "~1.14.0",
-    "should": "~2.1.0"
+    "should": "^2.1.1",
+    "mocha": "^1.14.0"
   },
   "engines": {
     "node": ">=0.10.0",
