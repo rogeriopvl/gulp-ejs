@@ -7,7 +7,7 @@ var ejs = require('ejs');
 module.exports = function (options, settings) {
     settings = settings || {};
     options = options || {};
-    settings.ext = settings.ext || '.html';
+    settings.ext = typeof settings.ext === "undefined" ? ".html" : settings.ext;
 
     return through.obj(function (file, enc, cb) {
         if (file.isNull()) {
