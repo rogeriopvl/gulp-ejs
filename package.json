@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "gulp-util": "^2.2.14",
-    "ejs": "^0.8.5",
+    "ejs": "^1.0.0",
     "through2": "^0.4.1"
   },
   "devDependencies": {
