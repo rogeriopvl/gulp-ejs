@@ -131,4 +131,28 @@ describe('gulp-ejs', function () {
     stream.end();
   });
 
+  it('should provide correct filenames', function (done) {
+
+    var file1 = new gutil.File({
+      path: 'foo',
+      contents: new Buffer('<%- filename -%>.html')
+    });
+
+    var file2 = new gutil.File({
+      path: 'bar',
+      contents: new Buffer('<%- filename -%>.html')
+    });
+
+    var stream = ejs();
+
+    stream.on('data', function (newFile) {
+
+      newFile.contents.toString().should.equal(newFile.path);
+      if (newFile.path == 'bar.html') done();
+    });
+
+    stream.write(file1);
+    stream.write(file2);
+    stream.end();
+  })
 });
