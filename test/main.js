@@ -155,4 +155,67 @@ describe('gulp-ejs', function () {
     stream.write(file2);
     stream.end();
   })
+
+  describe('with assets', function () {
+    it('should templating with javascripts', function (done) {
+      var srcFile = new gutil.File({
+        path: 'test/fixtures/config.js.ejs',
+        cwd: 'test/',
+        base: 'test/fixtures',
+        contents: fs.readFileSync('test/fixtures/config.js.ejs')
+      });
+
+      var stream = ejs({
+        baseUrl: 'https://github.com/rogeriopvl/gulp-ejs',
+        FacebookApiToken: function () {
+          return '0e24aa7fa3d7acffdb2085cec5ab0ce704f48318';
+        }
+      }, {
+        ext: ''// remove .ejs extension
+      });
+
+      stream.on('data', function (newFile) {
+
+        should.exist(newFile);
+        should.exist(newFile.contents);
+        path.extname(newFile.path).should.equal('.js')
+
+        String(newFile.contents).should.equal(fs.readFileSync('test/expected/config.js', 'utf8'));
+        done();
+      });
+
+      stream.write(srcFile);
+      stream.end();
+    });
+
+    it('should templating with stylesheets', function (done) {
+      var srcFile = new gutil.File({
+        path: 'test/fixtures/head.css.ejs',
+        cwd: 'test/',
+        base: 'test/fixtures',
+        contents: fs.readFileSync('test/fixtures/head.css.ejs')
+      });
+
+      var stream = ejs({
+        fonts_path: function () {
+          return '../fonts/fontawesome-webfont.eot?v=4.1.0';
+        }
+      }, {
+        ext: ''// remove .ejs extension
+      });
+
+      stream.on('data', function (newFile) {
+
+        should.exist(newFile);
+        should.exist(newFile.contents);
+        path.extname(newFile.path).should.equal('.css')
+
+        String(newFile.contents).should.equal(fs.readFileSync('test/expected/head.css', 'utf8'));
+        done();
+      });
+
+      stream.write(srcFile);
+      stream.end();
+    });
+  });
 });
