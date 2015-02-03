@@ -3,6 +3,7 @@
 var through = require('through2');
 var gutil = require('gulp-util');
 var ejs = require('ejs');
+var eol = require('os').EOL;
 
 module.exports = function (options, settings) {
     settings = settings || {};
@@ -24,7 +25,7 @@ module.exports = function (options, settings) {
 
         options.filename = file.path;
         try {
-            file.contents = new Buffer(ejs.render(file.contents.toString(), options));
+            file.contents = new Buffer(ejs.render(file.contents.toString(), options) + eol);
             file.path = gutil.replaceExtension(file.path, settings.ext);
         } catch (err) {
             this.emit('error', new gutil.PluginError('gulp-ejs', err.toString()));
