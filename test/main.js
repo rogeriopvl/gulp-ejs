@@ -3,7 +3,8 @@
 
 var fs = require('fs'),
 should = require('should'),
-path = require('path');
+path = require('path'),
+eol = require('os').EOL;
 require('mocha');
 
 var gutil = require('gulp-util'),
@@ -147,7 +148,7 @@ describe('gulp-ejs', function () {
 
     stream.on('data', function (newFile) {
 
-      newFile.contents.toString().should.equal(newFile.path);
+      newFile.contents.toString().should.equal(newFile.path + eol);
       if (newFile.path == 'bar.html') done();
     });
 
@@ -210,7 +211,7 @@ describe('gulp-ejs', function () {
         should.exist(newFile.contents);
         path.extname(newFile.path).should.equal('.css')
 
-        String(newFile.contents).should.equal(fs.readFileSync('test/expected/head.css', 'utf8'));
+        String(newFile.contents).should.equal(fs.readFileSync('test/expected/head.css', 'utf8') + eol);
         done();
       });
 
