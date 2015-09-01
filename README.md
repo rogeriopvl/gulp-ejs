@@ -48,6 +48,8 @@ A hash object where each key corresponds to a variable in your template. Also yo
 
 For more info on `ejs` options, check the [project's documentation](https://github.com/visionmedia/ejs).
 
+**Note:** As of `v1.2.0`, `file.data` is supported as a way of passing data into ejs. See [this](https://github.com/colynb/gulp-data#note-to-gulp-plugin-authors).
+
 #### settings
 Type: `hash`
 Default: `{ext: '.html'}`

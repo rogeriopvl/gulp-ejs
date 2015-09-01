@@ -24,7 +24,9 @@ module.exports = function (options, settings) {
 
         options.filename = file.path;
         try {
-            file.contents = new Buffer(ejs.render(file.contents.toString(), options));
+            file.contents = new Buffer(
+                ejs.render(file.contents.toString(), file.data || options)
+            );
             file.path = gutil.replaceExtension(file.path, settings.ext);
         } catch (err) {
             this.emit('error', new gutil.PluginError('gulp-ejs', err.toString()));
