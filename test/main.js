@@ -156,6 +156,38 @@ describe('gulp-ejs', function () {
     stream.end();
   })
 
+  it('should support passing data with gulp-data', function (done) {
+      var srcFile = new gutil.File({ path: 'test/fixtures/ok.ejs',
+                                   cwd: 'test/',
+                                   base: 'test/fixtures',
+                                   contents: fs.readFileSync('test/fixtures/ok.ejs')
+      });
+
+      // simulate gulp-data plugin
+      srcFile.data = { title: 'gulp-ejs' };
+
+      var stream = ejs();
+
+      stream.on('error', function (err) {
+          should.exist(err);
+          done(err);
+      });
+
+      stream.on('data', function (newFile) {
+
+          should.exist(newFile);
+          should.exist(newFile.contents);
+
+          String(newFile.contents).should.equal(String(expectedFile.contents));
+          done();
+      });
+
+      stream.write(srcFile);
+      String(path.extname(srcFile.path)).should.equal('.html');
+
+      stream.end();
+  });
+
   describe('with assets', function () {
     it('should templating with javascripts', function (done) {
       var srcFile = new gutil.File({
@@ -216,38 +248,6 @@ describe('gulp-ejs', function () {
 
       stream.write(srcFile);
       stream.end();
-    });
-
-    it('should support passing data with gulp-data', function (done) {
-        var srcFile = new gutil.File({ path: 'test/fixtures/ok.ejs',
-                                     cwd: 'test/',
-        base: 'test/fixtures',
-        contents: fs.readFileSync('test/fixtures/ok.ejs')
-        });
-
-        // simulate gulp-data plugin
-        srcFile.data = { title: 'gulp-ejs' };
-
-        var stream = ejs();
-
-        stream.on('error', function (err) {
-            should.exist(err);
-            done(err);
-        });
-
-        stream.on('data', function (newFile) {
-
-            should.exist(newFile);
-            should.exist(newFile.contents);
-
-            String(newFile.contents).should.equal(String(expectedFile.contents));
-            done();
-        });
-
-        stream.write(srcFile);
-        String(path.extname(srcFile.path)).should.equal('.html');
-
-        stream.end();
     });
   });
 });
