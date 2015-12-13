@@ -22,10 +22,12 @@ module.exports = function (options, settings) {
             );
         }
 
+        options = file.data || options;
         options.filename = file.path;
+
         try {
             file.contents = new Buffer(
-                ejs.render(file.contents.toString(), file.data || options)
+                ejs.render(file.contents.toString(), options)
             );
             file.path = gutil.replaceExtension(file.path, settings.ext);
         } catch (err) {
