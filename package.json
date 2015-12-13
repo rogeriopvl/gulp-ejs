@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "mocha": "2.3.4",
-    "should": "8.0.0"
+    "should": "8.0.1"
   },
   "engines": {
     "node": ">=0.10.0",
