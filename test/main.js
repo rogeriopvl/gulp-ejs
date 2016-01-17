@@ -51,7 +51,7 @@ describe('gulp-ejs', function () {
         });
 
         stream.write(srcFile);
-        String(path.extname(srcFile.path)).should.equal('.html');
+        String(path.extname(srcFile.path)).should.equal('.ejs');
 
       stream.end();
     });
@@ -134,21 +134,23 @@ describe('gulp-ejs', function () {
   it('should provide correct filenames', function (done) {
 
     var file1 = new gutil.File({
-      path: 'foo',
-      contents: new Buffer('<%- filename -%>.html')
+      path: 'foo.html',
+      contents: new Buffer('<%- filename -%>')
     });
 
     var file2 = new gutil.File({
-      path: 'bar',
-      contents: new Buffer('<%- filename -%>.html')
+      path: 'bar.html',
+      contents: new Buffer('<%- filename -%>')
     });
 
     var stream = ejs();
 
     stream.on('data', function (newFile) {
-
       newFile.contents.toString().should.equal(newFile.path);
-      if (newFile.path == 'bar.html') done();
+
+      if (newFile.path == 'bar.html') {
+          done();
+      }
     });
 
     stream.write(file1);
@@ -183,7 +185,7 @@ describe('gulp-ejs', function () {
       });
 
       stream.write(srcFile);
-      String(path.extname(srcFile.path)).should.equal('.html');
+      String(path.extname(srcFile.path)).should.equal('.ejs');
 
       stream.end();
   });
