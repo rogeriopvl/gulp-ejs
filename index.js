@@ -5,9 +5,8 @@ var gutil = require('gulp-util');
 var ejs = require('ejs');
 
 module.exports = function (options, settings) {
-    settings = settings || {};
     options = options || {};
-    settings.ext = typeof settings.ext === "undefined" ? ".html" : settings.ext;
+    settings = settings || {};
 
     return through.obj(function (file, enc, cb) {
         if (file.isNull()) {
@@ -29,7 +28,10 @@ module.exports = function (options, settings) {
             file.contents = new Buffer(
                 ejs.render(file.contents.toString(), options)
             );
-            file.path = gutil.replaceExtension(file.path, settings.ext);
+
+            if (typeof settings.ext !== 'undefined') {
+                file.path = gutil.replaceExtension(file.path, settings.ext);
+            }
         } catch (err) {
             this.emit('error', new gutil.PluginError('gulp-ejs', err.toString()));
         }

@@ -52,15 +52,17 @@ For more info on `ejs` options, check the [project's documentation](https://gith
 
 #### settings
 Type: `hash`
-Default: `{ext: '.html'}`
+Default: `{}`
 
 A hash object to configure the plugin.
 
 ##### settings.ext
 Type: `String`
-Default: `.html`
+Default: `undefined`
 
-Defines the default file extension that will be appended to the filename.
+Defines the file extension that will be appended to the filename. If no extension is provided, the same extension of the input file will be used.
+
+**Note:** As of `v2.0.0` the output file extension is no longer `.html` by default, you need to specify it, otherwise it will have the same extension of the input file.
 
 
 ## License
