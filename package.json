@@ -23,7 +23,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "ejs": "2.3.4",
+    "ejs": "2.4.1",
     "gulp-util": "3.0.7",
     "through2": "2.0.0"
   },
