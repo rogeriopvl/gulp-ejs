@@ -123,7 +123,10 @@ describe('gulp-ejs', function () {
       should.exist(newFile);
       should.exist(newFile.contents);
 
-      String(newFile.contents).should.equal(String(expectedFileWithPartial.contents));
+      var current = newFile.contents.toString().replace(/\r?\n|\r/g, '');
+      var expected = expectedFileWithPartial.contents.toString().replace(/\r?\n|\r/g, '');
+
+      current.should.equal(expected);
       done();
     });
 
