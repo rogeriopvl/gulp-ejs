@@ -23,6 +23,7 @@ module.exports = function (options, settings) {
 
         options = file.data || options;
         options.filename = file.path;
+        options.locals = {};
 
         try {
             file.contents = new Buffer(
