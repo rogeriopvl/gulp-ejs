@@ -28,7 +28,7 @@
     "through2": "2.0.1"
   },
   "devDependencies": {
-    "mocha": "2.4.5",
+    "mocha": "2.5.0",
     "should": "8.2.2"
   },
   "engines": {
