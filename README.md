@@ -46,9 +46,9 @@ Default: `{}`
 
 A hash object where each key corresponds to a variable in your template. Also you can set ejs options in this hash.
 
-For more info on `ejs` options, check the [project's documentation](https://github.com/visionmedia/ejs).
+For more info on `ejs` options, check the [project's documentation](https://github.com/mde/ejs).
 
-**Note:** As of `v1.2.0`, `file.data` is supported as a way of passing data into ejs. See [this](https://github.com/colynb/gulp-data#note-to-gulp-plugin-authors).
+**Note:** As of `v1.2.0`, `file.data` is supported as a way of passing data into ejs. See [this](https://github.com/colynb/gulp-data#note-to-gulp-plugin-authors). If both `file.data` and `options` are passed, they are merged (`options` works as default for ejs options and `file.data` overrides it.)
 
 #### settings
 Type: `hash`

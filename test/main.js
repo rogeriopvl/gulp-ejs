@@ -7,6 +7,7 @@ path = require('path');
 require('mocha');
 
 var gutil = require('gulp-util'),
+removeLineBreak = require('./helper').removeLineBreak,
 ejs = require('../');
 
 describe('gulp-ejs', function () {
@@ -123,8 +124,8 @@ describe('gulp-ejs', function () {
       should.exist(newFile);
       should.exist(newFile.contents);
 
-      var current = newFile.contents.toString().replace(/\r?\n|\r/g, '');
-      var expected = expectedFileWithPartial.contents.toString().replace(/\r?\n|\r/g, '');
+      var current = removeLineBreak(newFile.contents);
+      var expected = removeLineBreak(expectedFileWithPartial.contents);
 
       current.should.equal(expected);
       done();
@@ -159,7 +160,7 @@ describe('gulp-ejs', function () {
     stream.write(file1);
     stream.write(file2);
     stream.end();
-  })
+  });
 
   it('should support passing data with gulp-data', function (done) {
       var srcFile = new gutil.File({ path: 'test/fixtures/ok.ejs',
@@ -193,6 +194,39 @@ describe('gulp-ejs', function () {
       stream.end();
   });
 
+  it('should merge options and file.data when both are passed', function (done) {
+      var srcFile = new gutil.File({
+          path: 'test/fixtures/withpartial.ejs',
+          cwd: 'test/',
+          base: 'test/fixtures',
+          contents: fs.readFileSync('test/fixtures/withpartial.ejs')
+      });
+
+      // simulate gulp-data plugin
+      srcFile.data = { name: 'rpvl' };
+
+      var stream = ejs({ msg: 'gulp-ejs', name: 'foo' });
+
+      stream.on('error', function (err) {
+          should.exist(err);
+          done(err);
+      });
+
+      stream.on('data', function (newFile) {
+          should.exist(newFile);
+          should.exist(newFile.contents);
+
+          var current = removeLineBreak(newFile.contents);
+          var expected = removeLineBreak(expectedFileWithPartial.contents);
+
+          current.should.equal(expected);
+          done();
+      });
+
+      stream.write(srcFile);
+      stream.end();
+  });
+
   describe('with assets', function () {
     it('should templating with javascripts', function (done) {
       var srcFile = new gutil.File({
@@ -215,7 +249,7 @@ describe('gulp-ejs', function () {
 
         should.exist(newFile);
         should.exist(newFile.contents);
-        path.extname(newFile.path).should.equal('.js')
+        path.extname(newFile.path).should.equal('.js');
 
         String(newFile.contents).should.equal(fs.readFileSync('test/expected/config.js', 'utf8'));
         done();
@@ -245,7 +279,7 @@ describe('gulp-ejs', function () {
 
         should.exist(newFile);
         should.exist(newFile.contents);
-        path.extname(newFile.path).should.equal('.css')
+        path.extname(newFile.path).should.equal('.css');
 
         String(newFile.contents).should.equal(fs.readFileSync('test/expected/head.css', 'utf8'));
         done();
