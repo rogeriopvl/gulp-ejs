@@ -7,7 +7,6 @@ path = require('path');
 require('mocha');
 
 var gutil = require('gulp-util'),
-removeLineBreak = require('./helper').removeLineBreak,
 ejs = require('../');
 
 describe('gulp-ejs', function () {
@@ -124,10 +123,7 @@ describe('gulp-ejs', function () {
       should.exist(newFile);
       should.exist(newFile.contents);
 
-      var current = removeLineBreak(newFile.contents);
-      var expected = removeLineBreak(expectedFileWithPartial.contents);
-
-      current.should.equal(expected);
+      String(newFile.contents).should.equal(String(expectedFileWithPartial.contents));
       done();
     });
 
@@ -216,10 +212,7 @@ describe('gulp-ejs', function () {
           should.exist(newFile);
           should.exist(newFile.contents);
 
-          var current = removeLineBreak(newFile.contents);
-          var expected = removeLineBreak(expectedFileWithPartial.contents);
-
-          current.should.equal(expected);
+          String(newFile.contents).should.equal(String(expectedFileWithPartial.contents));
           done();
       });
 
