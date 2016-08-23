@@ -3,6 +3,7 @@
 var through = require('through2');
 var gutil = require('gulp-util');
 var ejs = require('ejs');
+var assign = require('object-assign');
 
 module.exports = function (options, settings) {
     options = options || {};
@@ -21,7 +22,7 @@ module.exports = function (options, settings) {
             );
         }
 
-        options = file.data || options;
+        options = assign({}, options, file.data);
         options.filename = file.path;
 
         try {
