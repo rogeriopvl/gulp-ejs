@@ -27,7 +27,7 @@ module.exports = function (options, settings) {
 
         try {
             file.contents = new Buffer(
-                ejs.render(file.contents.toString(), options)
+                ejs.render(file.contents.toString(), options, settings)
             );
 
             if (typeof settings.ext !== 'undefined') {
