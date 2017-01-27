@@ -24,6 +24,7 @@ module.exports = function (options, settings) {
 
         options = assign({}, options, file.data);
         options.filename = file.path;
+        options.locals = {};
 
         try {
             file.contents = new Buffer(
