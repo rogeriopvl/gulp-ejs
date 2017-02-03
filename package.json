@@ -20,6 +20,7 @@
     "url": "git://github.com/rogeriopvl/gulp-ejs.git"
   },
   "scripts": {
+    "pretest": "standard",
     "test": "mocha"
   },
   "dependencies": {
@@ -30,7 +31,8 @@
   },
   "devDependencies": {
     "mocha": "3.1.2",
-    "should": "11.2.0"
+    "should": "11.2.0",
+    "standard": "^8.6.0"
   },
   "engines": {
     "node": ">= 4",
