@@ -13,42 +13,48 @@ npm install --save-dev gulp-ejs
 Then, add it to your `gulpfile.js`:
 
 ```javascript
-var ejs = require("gulp-ejs");
+var ejs = require("gulp-ejs")
 
 gulp.src("./templates/*.ejs")
 	.pipe(ejs({
 		msg: "Hello Gulp!"
 	}))
-	.pipe(gulp.dest("./dist"));
+	.pipe(gulp.dest("./dist"))
 ```
 If you want to use `gulp-ejs` in a watch/livereload task, you may want to avoid gulp exiting on error when, for instance, a partial file is `ENOENT`.
 Here's an example on how to make it work:
 
 ```javascript
-var ejs = require('gulp-ejs');
-var gutil = require('gulp-util');
+var ejs = require('gulp-ejs')
+var gutil = require('gulp-util')
 
 gulp.src('./templates/*.ejs')
 	.pipe(ejs({
 		msg: 'Hello Gulp!'
 	}).on('error', gutil.log))
-	.pipe(gulp.dest('./dist'));
+	.pipe(gulp.dest('./dist'))
 ```
 This will make gulp log the error and continue normal execution.
 
 ## API
 
-### ejs(options, settings)
+### ejs(data, options, settings)
+
+#### data
+Type: `hash`
+Default: `{}`
+
+A hash object where each key corresponds to a variable in your template.
+
+**Note:** As of `v1.2.0`, `file.data` is supported as a way of passing data into ejs. See [this](https://github.com/colynb/gulp-data#note-to-gulp-plugin-authors). If both `file.data` and `data` are passed, they are merged (`data` works as default for ejs options and `file.data` overrides it.)
 
 #### options
 Type: `hash`
 Default: `{}`
 
-A hash object where each key corresponds to a variable in your template. Also you can set ejs options in this hash.
+A hash object for ejs options.
 
 For more info on `ejs` options, check the [project's documentation](https://github.com/mde/ejs).
-
-**Note:** As of `v1.2.0`, `file.data` is supported as a way of passing data into ejs. See [this](https://github.com/colynb/gulp-data#note-to-gulp-plugin-authors). If both `file.data` and `options` are passed, they are merged (`options` works as default for ejs options and `file.data` overrides it.)
 
 #### settings
 Type: `hash`
