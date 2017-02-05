@@ -80,7 +80,7 @@ describe('gulp-ejs', function () {
       contents: fs.readFileSync('test/fixtures/ok.ejs')
     })
 
-    var stream = ejs({ title: 'gulp-ejs' }, { ext: '.txt' })
+    var stream = ejs({ title: 'gulp-ejs' }, {}, { ext: '.txt' })
 
     stream.on('error', function (err) {
       should.exist(err)
@@ -120,32 +120,6 @@ describe('gulp-ejs', function () {
     })
 
     stream.write(srcFile)
-    stream.end()
-  })
-
-  it('should provide correct filenames', function (done) {
-    var file1 = new gutil.File({
-      path: 'foo.html',
-      contents: new Buffer('<%- filename -%>')
-    })
-
-    var file2 = new gutil.File({
-      path: 'bar.html',
-      contents: new Buffer('<%- filename -%>')
-    })
-
-    var stream = ejs()
-
-    stream.on('data', function (newFile) {
-      newFile.contents.toString().should.equal(newFile.path)
-
-      if (newFile.path === 'bar.html') {
-        done()
-      }
-    })
-
-    stream.write(file1)
-    stream.write(file2)
     stream.end()
   })
 
@@ -220,14 +194,16 @@ describe('gulp-ejs', function () {
         contents: fs.readFileSync('test/fixtures/config.js.ejs')
       })
 
-      var stream = ejs({
-        baseUrl: 'https://github.com/rogeriopvl/gulp-ejs',
-        FacebookApiToken: function () {
-          return '0e24aa7fa3d7acffdb2085cec5ab0ce704f48318'
-        }
-      }, {
-        ext: ''// remove .ejs extension
-      })
+      var stream = ejs(
+        {
+          baseUrl: 'https://github.com/rogeriopvl/gulp-ejs',
+          FacebookApiToken: function () {
+            return '0e24aa7fa3d7acffdb2085cec5ab0ce704f48318'
+          }
+        },
+        {},
+        { ext: '' } // remove .ejs extension
+      )
 
       stream.on('data', function (newFile) {
         should.exist(newFile)
@@ -254,7 +230,7 @@ describe('gulp-ejs', function () {
         fonts_path: function () {
           return '../fonts/fontawesome-webfont.eot?v=4.1.0'
         }
-      }, {
+      }, {}, {
         ext: ''// remove .ejs extension
       })
 

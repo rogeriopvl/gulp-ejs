@@ -5,7 +5,8 @@ var gutil = require('gulp-util')
 var ejs = require('ejs')
 var assign = require('object-assign')
 
-module.exports = function (options, settings) {
+module.exports = function (data, options, settings) {
+  data = data || {}
   options = options || {}
   settings = settings || {}
 
@@ -22,12 +23,12 @@ module.exports = function (options, settings) {
       )
     }
 
-    options = assign({}, options, file.data)
+    data = assign({}, data, file.data)
     options.filename = file.path
 
     try {
       file.contents = new Buffer(
-        ejs.render(file.contents.toString(), options)
+        ejs.render(file.contents.toString(), data, options)
       )
 
       if (typeof settings.ext !== 'undefined') {
