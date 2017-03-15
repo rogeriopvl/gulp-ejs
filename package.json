@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "mocha": "3.1.2",
-    "should": "11.2.0",
+    "should": "11.2.1",
     "standard": "^9.0.0"
   },
   "engines": {
