@@ -4,6 +4,7 @@ var through = require('through2')
 var gutil = require('gulp-util')
 var ejs = require('ejs')
 var assign = require('object-assign')
+var Buffer = require('safe-buffer').Buffer
 
 module.exports = function (data, options, settings) {
   data = data || {}

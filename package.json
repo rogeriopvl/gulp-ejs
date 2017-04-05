@@ -27,12 +27,13 @@
     "ejs": "2.5.6",
     "gulp-util": "3.0.8",
     "object-assign": "^4.1.0",
+    "safe-buffer": "^5.0.1",
     "through2": "2.0.3"
   },
   "devDependencies": {
     "mocha": "3.1.2",
     "should": "11.2.1",
-    "standard": "^9.0.0"
+    "standard": "^10.0.0"
   },
   "engines": {
     "node": ">= 4",
