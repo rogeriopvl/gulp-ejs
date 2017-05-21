@@ -1,5 +1,7 @@
 # gulp-ejs [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/rogeriopvl/gulp-ejs.svg)](https://greenkeeper.io/)
+
 > ejs plugin for [gulp](https://github.com/wearefractal/gulp)
 
 ## Usage
