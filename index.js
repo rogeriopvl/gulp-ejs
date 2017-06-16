@@ -29,13 +29,13 @@ module.exports = function (data, options, settings) {
 
     try {
       if (options.client === true) {
-        var name = file.basename.split(/\./)[0].toLowerCase()+(settings.suffix !== undefined ? settings.suffix : '');
-        var template = ejs.compile(file.contents.toString(), options);
-        //var templateFunctionBody = template.toString().match(/function[^{]+\{([\s\S]*)\}$/)[1]+'\n}';
-        options.filename = options.filename === undefined ? file.basename : options.filename;
+        var name = file.basename.split(/\./)[0].toLowerCase() + (settings.suffix !== undefined ? settings.suffix : '')
+        var template = ejs.compile(file.contents.toString(), options)
+        var templateFunctionBody = template.toString().match(/function[^{]+\{([\s\S]*)\}$/)[1]+'\n}'
+        options.filename = file.basename
         file.contents = new Buffer(
-          'if(window.templates === undefined) window.templates = {}; '+
-          'window.templates[\''+name+'\'] = '+template.toString().replace(/function anonymous\(/, 'function(')
+          'if(window.templates === undefined) window.templates = {}; ' +
+          'window.templates[\'' + name + '\'] = ' + template.toString().replace(/function anonymous\(/, 'function(')
         )
       } else {
         file.contents = new Buffer(
