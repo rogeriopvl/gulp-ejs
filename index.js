@@ -28,7 +28,7 @@ module.exports = function (data, options, settings) {
     options.filename = file.path
 
     try {
-      if(options.client === true){
+      if (options.client === true) {
         var name = file.basename.split(/\./)[0].toLowerCase()+(settings.suffix !== undefined ? settings.suffix : '');
         var template = ejs.compile(file.contents.toString(), options);
         //var templateFunctionBody = template.toString().match(/function[^{]+\{([\s\S]*)\}$/)[1]+'\n}';
