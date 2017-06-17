@@ -30,20 +30,20 @@ module.exports = function (data, options, settings) {
     try {
       if (options.client === true) {
         var name = file.basename.split(/\./)[0].toLowerCase()
-        if (settings.name !== undefined){
+        if (typeof settings.name !== 'undefined') {
           if (settings.name instanceof Function) {
             name = settings.name(file)
-          } else if(settings.name instanceof String) {
+          } else if (settings.name instanceof String) {
             name = settings.name
           }
         }
-        if (settings.suffix !== undefined) {
+        if (typeof settings.suffix !== 'undefined') {
           name += settings.suffix
         }
         var template = ejs.compile(file.contents.toString(), options)
         options.filename = file.basename
         file.contents = new Buffer(
-          'if(window.templates === undefined) window.templates = {}; ' +
+          'if(tyepof window.templates === 'undefined') window.templates = {}; ' +
           'window.templates[\'' + name + '\'] = ' + template.toString().replace(/function anonymous\(/, 'function(')
         )
       } else {
