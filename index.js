@@ -32,13 +32,13 @@ module.exports = function (data, options, settings) {
         var name = file.basename.split(/\./)[0].toLowerCase()
         if (settings.name !== undefined){
           if (settings.name instanceof Function) {
-            name = settings.name(file);
+            name = settings.name(file)
           } else if(settings.name instanceof String) {
-            name = settings.name;
+            name = settings.name
           }
         }
         if (settings.suffix !== undefined) {
-          name += settings.suffix;
+          name += settings.suffix
         }
         var template = ejs.compile(file.contents.toString(), options)
         options.filename = file.basename
