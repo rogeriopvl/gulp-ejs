@@ -43,7 +43,7 @@ module.exports = function (data, options, settings) {
         var template = ejs.compile(file.contents.toString(), options)
         options.filename = file.basename
         file.contents = new Buffer(
-          'if(tyepof window.templates === 'undefined') window.templates = {}; ' +
+          'if(typeof window.templates === 'undefined') window.templates = {}; ' +
           'window.templates[\'' + name + '\'] = ' + template.toString().replace(/function anonymous\(/, 'function(')
         )
       } else {
