@@ -24,7 +24,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "ejs": "2.5.6",
+    "ejs": "2.5.7",
     "gulp-util": "3.0.8",
     "object-assign": "^4.1.0",
     "safe-buffer": "^5.0.1",
