@@ -38,6 +38,19 @@ gulp.src('./templates/*.ejs')
 ```
 This will make gulp log the error and continue normal execution.
 
+If you want to specify the extension of output files, set the ext option:
+
+```javascript
+var ejs = require('gulp-ejs')
+
+gulp.src('./templates/*.ejs')
+	.pipe(ejs({
+		msg: 'Hello Gulp!',
+		ext: '.html'
+	})
+	.pipe(gulp.dest('./dist'))
+```
+
 ## API
 
 ### ejs(data, options, settings)
