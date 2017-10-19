@@ -31,8 +31,9 @@
     "through2": "2.0.3"
   },
   "devDependencies": {
+
     "mocha": "4.0.1",
-    "should": "13.1.0",
+    "should": "13.1.2",
     "standard": "^10.0.0"
   },
   "engines": {
