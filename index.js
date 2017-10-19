@@ -28,6 +28,7 @@ module.exports = function (data, options, settings) {
     options.filename = file.path
 
     try {
+      assign(ejs, settings)
       file.contents = new Buffer(
         ejs.render(file.contents.toString(), data, options)
       )
