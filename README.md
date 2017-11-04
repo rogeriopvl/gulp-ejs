@@ -51,6 +51,16 @@ gulp.src('./templates/*.ejs')
 	.pipe(gulp.dest('./dist'))
 ```
 
+### Acessing the ejs object
+
+The ejs object is also exported and you can use it to configure ejs:
+
+```javascript
+var gulpEjs = require('gulp-ejs')
+
+gulpEjs.ejs.fileLoader = function () { /* custom file loader */ }
+```
+
 ## API
 
 ### ejs(data, options, settings)
