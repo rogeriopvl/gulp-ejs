@@ -24,6 +24,10 @@ describe('gulp-ejs', function () {
     contents: fs.readFileSync('test/expected/outputWithPartial.html')
   })
 
+  it('should expose ejs global object', function () {
+    ejs.ejs.should.be.type('object')
+  })
+
   it('should produce correct html output when rendering a file', function (done) {
     var srcFile = new gutil.File({
       path: 'test/fixtures/ok.ejs',
