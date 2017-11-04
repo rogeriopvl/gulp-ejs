@@ -6,7 +6,7 @@ var ejs = require('ejs')
 var assign = require('object-assign')
 var Buffer = require('safe-buffer').Buffer
 
-module.exports = function (data, options, settings) {
+var gulpEjs = function (data, options, settings) {
   data = data || {}
   options = options || {}
   settings = settings || {}
@@ -43,3 +43,7 @@ module.exports = function (data, options, settings) {
     cb()
   })
 }
+
+gulpEjs.ejs = ejs
+
+module.exports = gulpEjs
