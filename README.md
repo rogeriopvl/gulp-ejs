@@ -44,10 +44,7 @@ If you want to specify the extension of output files, set the ext option:
 var ejs = require('gulp-ejs')
 
 gulp.src('./templates/*.ejs')
-	.pipe(ejs({
-		msg: 'Hello Gulp!',
-		ext: '.html'
-	})
+	.pipe(ejs({ msg: 'Hello Gulp!'}, {}, { ext: '.html' }))
 	.pipe(gulp.dest('./dist'))
 ```
 
