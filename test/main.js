@@ -1,23 +1,24 @@
 /* global describe, it */
 'use strict'
 
+require('mocha')
+
 var fs = require('fs')
 var should = require('should')
 var path = require('path')
-require('mocha')
+var Vinyl = require('vinyl')
 
-var gutil = require('gulp-util')
 var ejs = require('../')
 
 describe('gulp-ejs', function () {
-  var expectedFile = new gutil.File({
+  var expectedFile = new Vinyl({
     path: 'test/expected/output.html',
     cwd: 'test/',
     base: 'test/expected',
     contents: fs.readFileSync('test/expected/output.html')
   })
 
-  var expectedFileWithPartial = new gutil.File({
+  var expectedFileWithPartial = new Vinyl({
     path: 'test/expected/outputWithPartial.html',
     cwd: 'test/',
     base: 'test/expected',
@@ -29,7 +30,7 @@ describe('gulp-ejs', function () {
   })
 
   it('should produce correct html output when rendering a file', function (done) {
-    var srcFile = new gutil.File({
+    var srcFile = new Vinyl({
       path: 'test/fixtures/ok.ejs',
       cwd: 'test/',
       base: 'test/fixtures',
@@ -58,7 +59,7 @@ describe('gulp-ejs', function () {
   })
 
   it('should throw error when syntax is incorrect', function (done) {
-    var srcFile = new gutil.File({
+    var srcFile = new Vinyl({
       path: 'test/fixtures/nok.ejs',
       cwd: 'test/',
       base: 'test/fixtures',
@@ -77,7 +78,7 @@ describe('gulp-ejs', function () {
   })
 
   it('should produce correct html output with a specific file extension', function (done) {
-    var srcFile = new gutil.File({
+    var srcFile = new Vinyl({
       path: 'test/fixtures/ok.ejs',
       cwd: 'test/',
       base: 'test/fixtures',
@@ -106,7 +107,7 @@ describe('gulp-ejs', function () {
   })
 
   it('should produce correct html output using partial', function (done) {
-    var srcFile = new gutil.File({
+    var srcFile = new Vinyl({
       path: 'test/fixtures/withpartial.ejs',
       cwd: 'test/',
       base: 'test/fixtures',
@@ -128,7 +129,7 @@ describe('gulp-ejs', function () {
   })
 
   it('should support passing data with gulp-data', function (done) {
-    var srcFile = new gutil.File({
+    var srcFile = new Vinyl({
       path: 'test/fixtures/ok.ejs',
       cwd: 'test/',
       base: 'test/fixtures',
@@ -160,7 +161,7 @@ describe('gulp-ejs', function () {
   })
 
   it('should merge options and file.data when both are passed', function (done) {
-    var srcFile = new gutil.File({
+    var srcFile = new Vinyl({
       path: 'test/fixtures/withpartial.ejs',
       cwd: 'test/',
       base: 'test/fixtures',
@@ -191,7 +192,7 @@ describe('gulp-ejs', function () {
 
   describe('with assets', function () {
     it('should templating with javascripts', function (done) {
-      var srcFile = new gutil.File({
+      var srcFile = new Vinyl({
         path: 'test/fixtures/config.js.ejs',
         cwd: 'test/',
         base: 'test/fixtures',
@@ -223,7 +224,7 @@ describe('gulp-ejs', function () {
     })
 
     it('should templating with stylesheets', function (done) {
-      var srcFile = new gutil.File({
+      var srcFile = new Vinyl({
         path: 'test/fixtures/head.css.ejs',
         cwd: 'test/',
         base: 'test/fixtures',
