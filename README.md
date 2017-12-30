@@ -28,12 +28,12 @@ Here's an example on how to make it work:
 
 ```javascript
 var ejs = require('gulp-ejs')
-var gutil = require('gulp-util')
+var log = require('fancy-log')
 
 gulp.src('./templates/*.ejs')
 	.pipe(ejs({
 		msg: 'Hello Gulp!'
-	}).on('error', gutil.log))
+	}).on('error', log))
 	.pipe(gulp.dest('./dist'))
 ```
 This will make gulp log the error and continue normal execution.

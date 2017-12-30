@@ -1,7 +1,8 @@
 'use strict'
 
 var through = require('through2')
-var gutil = require('gulp-util')
+var PluginError = require('plugin-error')
+var replaceExtension = require('replace-ext')
 var ejs = require('ejs')
 var assign = require('object-assign')
 var Buffer = require('safe-buffer').Buffer
@@ -20,7 +21,7 @@ var gulpEjs = function (data, options, settings) {
     if (file.isStream()) {
       this.emit(
         'error',
-        new gutil.PluginError('gulp-ejs', 'Streaming not supported')
+        new PluginError('gulp-ejs', 'Streaming not supported')
       )
     }
 
@@ -33,10 +34,10 @@ var gulpEjs = function (data, options, settings) {
       )
 
       if (typeof settings.ext !== 'undefined') {
-        file.path = gutil.replaceExtension(file.path, settings.ext)
+        file.path = replaceExtension(file.path, settings.ext)
       }
     } catch (err) {
-      this.emit('error', new gutil.PluginError('gulp-ejs', err.toString()))
+      this.emit('error', new PluginError('gulp-ejs', err.toString()))
     }
 
     this.push(file)
