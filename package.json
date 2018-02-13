@@ -32,7 +32,7 @@
     "through2": "2.0.3"
   },
   "devDependencies": {
-    "mocha": "5.0.0",
+    "mocha": "5.0.1",
     "should": "13.2.1",
     "standard": "^10.0.0",
     "vinyl": "^2.1.0"
