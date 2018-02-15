@@ -4,7 +4,6 @@ var through = require('through2')
 var PluginError = require('plugin-error')
 var replaceExtension = require('replace-ext')
 var ejs = require('ejs')
-var assign = require('object-assign')
 var Buffer = require('safe-buffer').Buffer
 
 var gulpEjs = function (data, options, settings) {
@@ -25,7 +24,7 @@ var gulpEjs = function (data, options, settings) {
       )
     }
 
-    data = assign({}, data, file.data)
+    data = Object.assign({}, data, file.data)
     options.filename = file.path
 
     try {
