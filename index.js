@@ -28,9 +28,29 @@ var gulpEjs = function (data, options, settings) {
     options.filename = file.path
 
     try {
-      file.contents = new Buffer(
-        ejs.render(file.contents.toString(), data, options)
-      )
+      if (options.client === true) {
+        var name = file.basename.split(/\./)[0].toLowerCase()
+        if (typeof settings.name !== 'undefined') {
+          if (settings.name instanceof Function) {
+            name = settings.name(file)
+          } else if (settings.name instanceof String) {
+            name = settings.name
+          }
+        }
+        if (typeof settings.suffix !== 'undefined') {
+          name += settings.suffix
+        }
+        var template = ejs.compile(file.contents.toString(), options)
+        options.filename = file.basename
+        file.contents = new Buffer(
+          'if(typeof window.templates === \'undefined\') window.templates = {}; ' +
+          'window.templates[\'' + name + '\'] = ' + template.toString().replace(/function anonymous\(/, 'function(')
+        )
+      } else {
+        file.contents = new Buffer(
+          ejs.render(file.contents.toString(), data, options)
+        )
+      }
 
       if (typeof settings.ext !== 'undefined') {
         file.path = replaceExtension(file.path, settings.ext)
