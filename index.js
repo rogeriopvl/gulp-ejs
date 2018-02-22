@@ -24,12 +24,12 @@ var gulpEjs = function (data, options, settings) {
       )
     }
 
-    data = Object.assign({}, data, file.data)
+    var fileData = Object.assign({}, data, file.data)
     options.filename = file.path
 
     try {
       file.contents = new Buffer(
-        ejs.render(file.contents.toString(), data, options)
+        ejs.render(file.contents.toString(), fileData, options)
       )
 
       if (typeof settings.ext !== 'undefined') {
