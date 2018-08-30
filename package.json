@@ -24,7 +24,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "ejs": "2.5.9",
+    "ejs": "2.6.1",
     "plugin-error": "^1.0.0",
     "replace-ext": "^1.0.0",
     "through2": "2.0.3"
@@ -34,7 +34,6 @@
     "should": "13.2.3",
     "standard": "12.0.1",
     "vinyl": "^2.2.0"
-
   },
   "engines": {
     "node": ">= 4",
