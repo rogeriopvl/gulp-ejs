@@ -4,7 +4,6 @@ var through = require('through2')
 var PluginError = require('plugin-error')
 var replaceExtension = require('replace-ext')
 var ejs = require('ejs')
-var Buffer = require('safe-buffer').Buffer
 
 var gulpEjs = function (data, options, settings) {
   data = data || {}
@@ -28,7 +27,7 @@ var gulpEjs = function (data, options, settings) {
     options.filename = file.path
 
     try {
-      file.contents = new Buffer(
+      file.contents = Buffer.from(
         ejs.render(file.contents.toString(), fileData, options)
       )
 
