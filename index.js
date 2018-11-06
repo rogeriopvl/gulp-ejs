@@ -5,22 +5,19 @@ var PluginError = require('plugin-error')
 var replaceExtension = require('replace-ext')
 var ejs = require('ejs')
 
-var gulpEjs = function (data, options, settings) {
+var gulpEjs = function(data, options, settings) {
   data = data || {}
   options = options || {}
   settings = settings || {}
 
-  return through.obj(function (file, enc, cb) {
+  return through.obj(function(file, enc, cb) {
     if (file.isNull()) {
       this.push(file)
       return cb()
     }
 
     if (file.isStream()) {
-      this.emit(
-        'error',
-        new PluginError('gulp-ejs', 'Streaming not supported')
-      )
+      this.emit('error', new PluginError('gulp-ejs', 'Streaming not supported'))
     }
 
     var fileData = Object.assign({}, data, file.data)
