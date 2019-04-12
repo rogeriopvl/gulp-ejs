@@ -1,45 +1,39 @@
 'use strict'
 
-var through = require('through2')
-var PluginError = require('plugin-error')
-var replaceExtension = require('replace-ext')
-var ejs = require('ejs')
+const through = require('through2')
+const PluginError = require('plugin-error')
+const ejs = require('ejs')
 
-var gulpEjs = function(data, options, settings) {
-  data = data || {}
-  options = options || {}
-  settings = settings || {}
+const PLUGIN_NAME = 'gulp-ejs'
 
-  return through.obj(function(file, enc, cb) {
+function render(data, options = {}) {
+  return through.obj(function(file, encoding, callback) {
     if (file.isNull()) {
-      this.push(file)
-      return cb()
+      return callback(null, file)
     }
 
     if (file.isStream()) {
-      this.emit('error', new PluginError('gulp-ejs', 'Streaming not supported'))
+      callback(new PluginError(PLUGIN_NAME, 'Streaming not supported'))
     }
 
-    var fileData = Object.assign({}, data, file.data)
     options.filename = file.path
+
+    const ejsData = Object.assign({}, data, file.data)
 
     try {
       file.contents = Buffer.from(
-        ejs.render(file.contents.toString(), fileData, options)
+        ejs.render(file.contents.toString(), ejsData, options)
       )
 
-      if (typeof settings.ext !== 'undefined') {
-        file.path = replaceExtension(file.path, settings.ext)
-      }
+      this.push(file)
     } catch (err) {
-      this.emit('error', new PluginError('gulp-ejs', err.toString()))
+      this.emit('error', new PluginError(PLUGIN_NAME, err, { fileName: file.path }))
     }
 
-    this.push(file)
-    cb()
+    callback()
   })
 }
 
-gulpEjs.ejs = ejs
+render.ejs = ejs
 
-module.exports = gulpEjs
+module.exports = render
