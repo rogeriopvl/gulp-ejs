@@ -34,6 +34,7 @@ function render(data, options = {}) {
   })
 }
 
-render.ejs = ejs
+// expose ejs object for configuration
+render.__EJS__ = ejs
 
 module.exports = render

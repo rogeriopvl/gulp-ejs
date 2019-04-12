@@ -9,7 +9,7 @@ const ejs = require('../')
 
 describe('gulp-ejs', function() {
   it('should expose ejs global object', function() {
-    assert.equal(typeof ejs.ejs, 'object')
+    assert.equal(typeof ejs.__EJS__, 'object')
   })
 
   it('should render ejs template', done => {
