@@ -27,7 +27,10 @@ function render(data, options = {}) {
 
       this.push(file)
     } catch (err) {
-      this.emit('error', new PluginError(PLUGIN_NAME, err, { fileName: file.path }))
+      this.emit(
+        'error',
+        new PluginError(PLUGIN_NAME, err, { fileName: file.path })
+      )
     }
 
     callback()

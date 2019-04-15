@@ -21,9 +21,11 @@ describe('gulp-ejs', function() {
 
     stream.on('end', done)
 
-    stream.write(new Vinyl({
-      contents: Buffer.from('<h1><%= title %></h1>')
-    }))
+    stream.write(
+      new Vinyl({
+        contents: Buffer.from('<h1><%= title %></h1>')
+      })
+    )
 
     stream.end()
   })
@@ -38,9 +40,11 @@ describe('gulp-ejs', function() {
 
     stream.on('end', done)
 
-    stream.write(new Vinyl({
-      contents: Buffer.from('<h1><%= title</h1>')
-    }))
+    stream.write(
+      new Vinyl({
+        contents: Buffer.from('<h1><%= title</h1>')
+      })
+    )
 
     stream.end()
   })
@@ -66,13 +70,17 @@ describe('gulp-ejs', function() {
       done()
     })
 
-    stream.write(new Vinyl({
-      contents: Buffer.from('<h1><%= title %></h1>')
-    }))
+    stream.write(
+      new Vinyl({
+        contents: Buffer.from('<h1><%= title %></h1>')
+      })
+    )
 
-    stream.write(new Vinyl({
-      contents: Buffer.from('<p><%= message %></p>')
-    }))
+    stream.write(
+      new Vinyl({
+        contents: Buffer.from('<p><%= message %></p>')
+      })
+    )
 
     stream.end()
   })
