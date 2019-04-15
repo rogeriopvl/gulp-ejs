@@ -5,11 +5,31 @@
 const { strict: assert } = require('assert')
 const Vinyl = require('vinyl')
 const data = require('gulp-data')
+const ejsDependency = require('ejs')
+
 const ejs = require('../')
 
 describe('gulp-ejs', function() {
   it('should expose ejs global object', function() {
-    assert.equal(typeof ejs.__EJS__, 'object')
+    assert.equal(ejs.__EJS__, ejsDependency)
+  })
+
+  it('should work with no suplied data', done => {
+    const stream = ejs()
+
+    stream.on('data', data => {
+      assert.equal(data.contents.toString(), '')
+    })
+
+    stream.on('end', done)
+
+    stream.write(
+      new Vinyl({
+        contents: Buffer.from('')
+      })
+    )
+
+    stream.end()
   })
 
   it('should render ejs template', done => {
