@@ -2,7 +2,7 @@
 
 /* eslint-env mocha */
 
-const { strict: assert } = require('assert')
+const assert = require('assert')
 const Vinyl = require('vinyl')
 const data = require('gulp-data')
 const ejsDependency = require('ejs')
@@ -11,14 +11,14 @@ const ejs = require('../')
 
 describe('gulp-ejs', function() {
   it('should expose ejs global object', function() {
-    assert.equal(ejs.__EJS__, ejsDependency)
+    assert.strictEqual(ejs.__EJS__, ejsDependency)
   })
 
   it('should work with no suplied data', done => {
     const stream = ejs()
 
     stream.on('data', data => {
-      assert.equal(data.contents.toString(), '')
+      assert.strictEqual(data.contents.toString(), '')
     })
 
     stream.on('end', done)
@@ -36,7 +36,7 @@ describe('gulp-ejs', function() {
     const stream = ejs({ title: 'gulp-ejs' })
 
     stream.on('data', data => {
-      assert.equal(data.contents.toString(), '<h1>gulp-ejs</h1>')
+      assert.strictEqual(data.contents.toString(), '<h1>gulp-ejs</h1>')
     })
 
     stream.on('end', done)
@@ -86,7 +86,7 @@ describe('gulp-ejs', function() {
 
     stream.on('end', () => {
       const expected = '<h1>gulp-ejs</h1><p>Hello world!</p>'
-      assert.equal(output.join(''), expected)
+      assert.strictEqual(output.join(''), expected)
       done()
     })
 
