@@ -1,6 +1,6 @@
 {
   "name": "gulp-ejs",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "description": "A plugin for Gulp that parses ejs template files",
   "keywords": [
     "gulpplugin",
