@@ -106,6 +106,18 @@ describe('gulp-ejs', function() {
   })
 
   it('should render async ejs template', function(done) {
+    /* Skip test if async function is not supported (Node 7.5-) */
+    try {
+      /* eslint-disable-next-line no-new-func */
+      (new Function('return (async function(){}).constructor;'))()
+    } catch (e) {
+      if (e instanceof SyntaxError) {
+        this.skip()
+      } else {
+        throw e
+      }
+    }
+
     const title = () => new Promise((resolve, reject) => {
       process.nextTick(() => resolve('gulp-ejs'))
     })
