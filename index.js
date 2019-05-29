@@ -32,7 +32,7 @@ function render(data, options = {}) {
             'error',
             new PluginError(PLUGIN_NAME, err, { fileName: file.path })
           )
-        }).then(() => callback())
+        }).then(callback)
 
         return
       }
