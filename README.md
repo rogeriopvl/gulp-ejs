@@ -58,19 +58,25 @@ ejs.__EJS__.fileLoader = function () { /* custom file loader */ }
 
 ### Async rendering (requires runtime support)
 
-You can use async/await in ejs template by passing `{async: true}` in options:
+Since ejs [v2.5.8](https://github.com/mde/ejs/releases/tag/v2.5.8) added support for promise/async-await `renderFile`, you can now use this option with gulp-ejs v4.1.0.
+
+You can use async/await in your ejs templates by passing `{ async: true }` in the ejs options hash:
 
 ```javascript
 const ejs = require('gulp-ejs')
 
-async function blah() { /* async task */ }
+async function foobar() { /* async task */ }
 
-gulp.src("./templates/*.ejs")
-	.pipe(ejs({blah}, {async: true}))
-	.pipe(gulp.dest("./dist"))
+gulp.src('./templates/*.ejs')
+	.pipe(ejs({ foobar }, { async: true }))
+	.pipe(gulp.dest('./dist'))
 ```
 
-In template, await will be used to call async functions for example: `<%= await blah() %>`
+Then in your templates use `await` to call async functions. Here's an example:
+
+```javascript
+<%= await foobar() %>
+```
 
 ## API
 
