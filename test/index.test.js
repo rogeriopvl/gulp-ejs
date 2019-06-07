@@ -104,4 +104,37 @@ describe('gulp-ejs', function() {
 
     stream.end()
   })
+
+  it('should render async ejs template', function(done) {
+    /* Skip test if async function is not supported (Node 7.5-) */
+    try {
+      /* eslint-disable-next-line no-new-func */
+      (new Function('return (async function(){}).constructor;'))()
+    } catch (e) {
+      if (e instanceof SyntaxError) {
+        this.skip()
+      } else {
+        throw e
+      }
+    }
+
+    const title = () => new Promise((resolve, reject) => {
+      process.nextTick(() => resolve('gulp-ejs'))
+    })
+    const stream = ejs({ title: title }, { async: true })
+
+    stream.on('data', data => {
+      assert.strictEqual(data.contents.toString(), '<h1>gulp-ejs</h1>')
+    })
+
+    stream.on('end', done)
+
+    stream.write(
+      new Vinyl({
+        contents: Buffer.from('<h1><%= await title() %></h1>')
+      })
+    )
+
+    stream.end()
+  })
 })

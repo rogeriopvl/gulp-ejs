@@ -21,11 +21,24 @@ function render(data, options = {}) {
     const ejsData = Object.assign({}, data, file.data)
 
     try {
-      file.contents = Buffer.from(
-        ejs.render(file.contents.toString(), ejsData, options)
-      )
+      const rendered = ejs.render(file.contents.toString(), ejsData, options)
 
-      this.push(file)
+      if (options.async && typeof rendered.then === 'function') {
+        rendered.then(rendered => {
+          file.contents = Buffer.from(rendered)
+          this.push(file)
+        }).catch(err => {
+          this.emit(
+            'error',
+            new PluginError(PLUGIN_NAME, err, { fileName: file.path })
+          )
+        }).then(callback)
+
+        return
+      }
+
+      file.contents = Buffer.from(rendered);
+      this.push(file);
     } catch (err) {
       this.emit(
         'error',

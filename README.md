@@ -56,6 +56,22 @@ ejs.__EJS__.fileLoader = function () { /* custom file loader */ }
 
 **Note:** As of version 4, the exported ejs object was renamed from `ejs` to `__EJS__`.
 
+### Async rendering (requires runtime support)
+
+You can use async/await in ejs template by passing `{async: true}` in options:
+
+```javascript
+const ejs = require('gulp-ejs')
+
+async function blah() { /* async task */ }
+
+gulp.src("./templates/*.ejs")
+	.pipe(ejs({blah}, {async: true}))
+	.pipe(gulp.dest("./dist"))
+```
+
+In template, await will be used to call async functions for example: `<%= await blah() %>`
+
 ## API
 
 ### ejs(data, options)
