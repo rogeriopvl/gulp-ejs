@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.1.0
+
+- Add support for the new ejs ([v.2.5.8](https://github.com/mde/ejs/releases/tag/v2.5.8)) async rendering feature. (@Tietew)
+
 ## v4.0.0
 
 This version features a complete rewrite of the plugin to update it's code to modern es6 javascript, which involve some breaking changes.
