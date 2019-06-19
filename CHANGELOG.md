@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.1.1
+
+- Update ejs to `v2.6.2`
+
 ## v4.1.0
 
 - Add support for the new ejs ([v.2.5.8](https://github.com/mde/ejs/releases/tag/v2.5.8)) async rendering feature. (@Tietew)
