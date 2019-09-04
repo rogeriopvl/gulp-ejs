@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.1.2
+
+- Update ejs to `v2.7.1`
+
 ## v4.1.1
 
 - Update ejs to `v2.6.2`
