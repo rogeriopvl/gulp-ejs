@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.0.0
+- Update ejs to `v3.0.1` (please read [ejs's changelog](https://github.com/mde/ejs/blob/master/CHANGELOG.md) for more info on discontinued ejs features)
+
 ## v4.1.2
 
 - Update ejs to `v2.7.1`
