@@ -31,7 +31,7 @@
     "through2": "^3.0.1"
   },
   "devDependencies": {
-    "eslint": "^6.3.0",
+    "eslint": "^9.32.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^11.0.0",
